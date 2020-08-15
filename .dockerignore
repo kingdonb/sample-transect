@@ -5,3 +5,5 @@ tmp/**
 public/**
 log/**
 vendor/**
+k8s.yml
+secret.yml
