@@ -19,3 +19,6 @@ install:
 build:
   okteto build -t {{DEVIMAGE}} . --target dev \
     && okteto build -t {{IMAGE}} .
+
+pull:
+  docker pull {{IMAGE}}

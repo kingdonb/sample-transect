@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    fluxcd.io/automated: "false"
+    fluxcd.io/automated: "true"
     fluxcd.io/ignore: "false"
     fluxcd.io/tag.web: regex:^[a-f0-9]{7}$
   labels:
@@ -26,12 +26,8 @@ spec:
         app: sample
     spec:
       containers:
-      - args:
-        - start
-        command:
-        - npm
-        env:
-        - name: NODE_ENV
+      - env:
+        - name: RAILS_ENV
           value: development
         - name: APP_PORT
           value: "3000"
