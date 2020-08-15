@@ -31,5 +31,7 @@ module SampleTransect
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.hosts << "sample.wkstest.xyz"
   end
 end

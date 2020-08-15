@@ -7,3 +7,7 @@ log
 public
 tmp
 node_modules
+.git
+.dockerignore
+.gitignore
+.stignore

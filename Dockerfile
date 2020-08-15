@@ -23,6 +23,7 @@ ENV RAILS_ENV production
 RUN rvm ${RUBY} do bundle install
 RUN yarn install
 RUN ASSET_PRECOMPILE=1 rvm ${RUBY} do bundle exec rake assets:precompile
+RUN yarn install --check-files
 
 FROM builder AS dev
 ENV RAILS_ENV development
@@ -47,7 +48,6 @@ COPY --chown=${RVM_USER} . ${APPDIR}
 USER ${RVM_USER}
 ENV RAILS_ENV production
 RUN echo 'gem: --no-document' > /home/${RVM_USER}/.gemrc && bash -
-RUN yarn install --check-files
 RUN ./bin/webpack
 
 # Expose port 3000 to the Docker host, so we can access it
