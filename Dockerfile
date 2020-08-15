@@ -47,6 +47,7 @@ COPY --chown=${RVM_USER} . ${APPDIR}
 USER ${RVM_USER}
 ENV RAILS_ENV production
 RUN echo 'gem: --no-document' > /home/${RVM_USER}/.gemrc && bash -
+RUN yarn install --check-files
 RUN ./bin/webpack
 
 # Expose port 3000 to the Docker host, so we can access it
