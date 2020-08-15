@@ -1,0 +1,120 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    fluxcd.io/automated: "false"
+    fluxcd.io/ignore: "false"
+    fluxcd.io/tag.web: regex:^[a-f0-9]{7}$
+  labels:
+    app.kubernetes.io/instance: sample
+    app.kubernetes.io/name: sample
+    app.kubernetes.io/part-of: sample
+    app.kubernetes.io/version: v1
+  name: sample
+  namespace: kingdonb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample
+  template:
+    metadata:
+      annotations:
+        config.linkerd.io/trace-collector: oc-collector.tracing:55678
+      labels:
+        app: sample
+    spec:
+      containers:
+      - args:
+        - start
+        command:
+        - npm
+        env:
+        - name: NODE_ENV
+          value: development
+        - name: APP_PORT
+          value: "3000"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: DATABASE_URL
+              name: sample-transect-secret
+        - name: ENV_NAME
+          valueFrom:
+            secretKeyRef:
+              key: ENV_NAME
+              name: sample-transect-secret
+        - name: PAPERTRAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: PAPERTRAIL_HOST
+              name: sample-transect-secret
+        - name: PAPERTRAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              key: PAPERTRAIL_PORT
+              name: sample-transect-secret
+        - name: MAILGUN_DOMAIN
+          valueFrom:
+            secretKeyRef:
+              key: MAILGUN_DOMAIN
+              name: sample-transect-secret
+        - name: MAILGUN_FROM
+          valueFrom:
+            secretKeyRef:
+              key: MAILGUN_FROM
+              name: sample-transect-secret
+        - name: MAILGUN_KEY
+          valueFrom:
+            secretKeyRef:
+              key: MAILGUN_KEY
+              name: sample-transect-secret
+        image: registry.cloud.okteto.net/kingdonb/sample-transect:d9e8044
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - curl
+            - localhost:3000/healthz
+          failureThreshold: 3
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: transect-web
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - curl
+            - localhost:3000/healthz
+          failureThreshold: 3
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 250m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: kingdonb
+  name: sample
+  labels:
+    app.kubernetes.io/instance: sample
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+spec:
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 3000
+  selector:
+    app: sample
+  type: ClusterIP
