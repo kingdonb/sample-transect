@@ -1,0 +1,9 @@
+vendor
+Dockerfile
+justfile
+k8s.yml
+okteto.yml
+log
+public
+tmp
+node_modules
