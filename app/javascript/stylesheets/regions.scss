@@ -4,41 +4,136 @@
 */
 
 $pink-color: #FD8698;
- 
+
 #outer-box {
-  width: 900px;
-  height: 630px;
+  width: 100%;
   display:block;
   position:relative;
- 
+
   img {
-    width: 900px;
-    height: auto;
-  }
- 
-  #inner-box {
-    background: $pink-color;
-    height: 100%;
     width: 100%;
-    opacity: 0;
+    height: auto;
+    z-index: -1;
+    overflow: auto;
+  }
+
+  #outer-container {
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    float: left;
+    border: 1px solid gray;
+
+  .y-box-1 {
     top: 0;
+  }
+  .x-box-1 {
     left: 0;
+  }
+  .y-box-2 {
+    top: 7.14285%;
+  }
+  .x-box-2 {
+    left: 7.14285%;
+  }
+  .y-box-3 {
+    top: 14.28570%;
+  }
+  .x-box-3 {
+    left: 14.28570%;
+  }
+  .y-box-4 {
+    top: 21.42855%;
+  }
+  .x-box-4 {
+    left: 21.42855%;
+  }
+  .y-box-5 {
+    top: 28.57140%;
+  }
+  .x-box-5 {
+    left: 28.57140%;
+  }
+  .y-box-6 {
+    top: 35.71425%;
+  }
+  .x-box-6 {
+    left: 35.71425%;
+  }
+  .y-box-7 {
+    top: 42.85710%;
+  }
+  .x-box-7 {
+    left: 42.85710%;
+  }
+  .y-box-8 {
+    top: 49.99995%;
+  }
+  .x-box-8 {
+    left: 49.99995%;
+  }
+  .y-box-9 {
+    top: 57.14280%;
+  }
+  .x-box-9 {
+    left: 57.14280%;
+  }
+  .y-box-10 {
+    top: 64.28565%;
+  }
+  .x-box-10 {
+    left: 64.28565%;
+  }
+  .y-box-11 {
+    top: 71.42850%;
+  }
+  .x-box-11 {
+    left: 71.42850%;
+  }
+  .y-box-12 {
+    top: 78.57135%;
+  }
+  .x-box-12 {
+    left: 78.57135%;
+  }
+  .y-box-13 {
+    top: 85.71420%;
+  }
+  .x-box-13 {
+    left: 85.71420%;
+  }
+  .y-box-14 {
+    top: 92.85705%;
+  }
+  .x-box-14 {
+    left: 92.85705%;
+  }
+
+  .inner-box {
+    background: $pink-color;
+    opacity: 0;
     position: absolute;
     padding: 0;
     transition: opacity .5s;
- 
+    height: 7.14285%;
+    width: 7.14285%;
+
     p {
-      color: #fff;
-      line-height: 150px;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #000;
       font-family: 'arial';
-      text-align: center;
+      font-size: 14pt;
     }
-  }
- 
-  &:hover {
-    #inner-box {
+    &:hover {
       opacity: .9;
       transition: opacity .5s;
     }
+  }
   }
 }

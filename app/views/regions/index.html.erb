@@ -1,6 +1,19 @@
 <div id="outer-box">
   <%= image_pack_tag "Wondrous Wetland.png" %>
-  <div id="inner-box">
-    <p>This is the overlay!</p>
+  <div id="outer-container">
+  <%
+    (1..14).each do |y|
+      (1..14).each do |x|
+        y_class = "y-box-#{y}"
+        x_class = "x-box-#{x}"
+        y_oriented_number = y + ((x-1) * 14)
+        x_oriented_number = ((y-1) * 14) + x
+      %>
+    <div class="<%= y_class %> <%= x_class %> inner-box">
+      <p>#<%= x_oriented_number %></p>
+    </div>
+    <%
+      end
+  end %>
   </div>
 </div>
