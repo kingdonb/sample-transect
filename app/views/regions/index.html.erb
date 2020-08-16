@@ -1,15 +1,19 @@
 <div id="outer-box">
   <%= image_pack_tag "Wondrous Wetland.png" %>
+  <div id="outer-container">
   <%
-    (1..14).each do |x|
-      (1..14).each do |y|
+    (1..14).each do |y|
+      (1..14).each do |x|
         y_class = "y-box-#{y}"
         x_class = "x-box-#{x}"
+        y_oriented_number = y + ((x-1) * 14)
+        x_oriented_number = ((y-1) * 14) + x
       %>
     <div class="<%= y_class %> <%= x_class %> inner-box">
-      <p>#<%= y + ((x-1) * 14) %></p>
+      <p>#<%= x_oriented_number %></p>
     </div>
     <%
       end
   end %>
+  </div>
 </div>

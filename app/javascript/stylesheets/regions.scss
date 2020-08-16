@@ -6,15 +6,25 @@
 $pink-color: #FD8698;
 
 #outer-box {
-  width: 900px;
-  height: 630px;
+  width: 100%;
   display:block;
   position:relative;
 
   img {
-    width: 900px;
+    width: 100%;
     height: auto;
+    z-index: -1;
+    overflow: auto;
   }
+
+  #outer-container {
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    float: left;
+    border: 1px solid gray;
 
   .y-box-1 {
     top: 0;
@@ -112,14 +122,18 @@ $pink-color: #FD8698;
 
     p {
       margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       color: #000;
       font-family: 'arial';
       font-size: 14pt;
-      text-align: center;
     }
     &:hover {
       opacity: .9;
       transition: opacity .5s;
     }
+  }
   }
 }
