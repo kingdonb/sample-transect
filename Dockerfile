@@ -14,9 +14,10 @@ COPY --chown=${RVM_USER} Rakefile ${APPDIR}/
 COPY --chown=${RVM_USER} config/ ${APPDIR}/config/
 COPY --chown=${RVM_USER} bin/ ${APPDIR}/bin/
 
-COPY --chown=${RVM_USER} app/javascript ${APPDIR}/app/javascript/
 COPY --chown=${RVM_USER} .browserslistrc babel.config.js package.json yarn.lock postcss.config.js ${APPDIR}/
 
+RUN yarn install
+COPY --chown=${RVM_USER} app/javascript ${APPDIR}/app/javascript/
 RUN ASSET_PRECOMPILE=1 rvm ${RUBY} do bundle exec rake assets:precompile
 ENV RAILS_ENV production
 
