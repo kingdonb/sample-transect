@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import Turbolinks from "turbolinks"
 
 export default class extends Controller {
   static targets = [  ]
@@ -11,6 +12,6 @@ export default class extends Controller {
     let id = event.currentTarget.id
     let plot_id = id.match(/plot-([0-9]+)/)[1]
 
-    window.location = `/regions/${plot_id}`;
+    Turbolinks.visit(`/regions/${plot_id}`);
   }
 }

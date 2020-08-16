@@ -15,3 +15,6 @@ const imagePath = (name) => images(name, true)
 
 import 'bootstrap/dist/js/bootstrap';
 import "controllers"
+
+var Turbolinks = require("turbolinks")
+Turbolinks.start()
