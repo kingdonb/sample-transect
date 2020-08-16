@@ -1,2 +1,30 @@
-<h1>Regions#show</h1>
-<p>Find me in app/views/regions/show.html.erb</p>
+<div id="outer-box">
+  <%= image_pack_tag "Wondrous Wetland.png" %>
+  <div id="outer-container">
+  <div id="location-reminder">
+    <p>Plot&nbsp;#:&nbsp;<%= params[:id] %></p>
+  </div>
+  <%
+    (1..14).each do |y|
+      (1..14).each do |x|
+        y_class = "y-box-#{y}"
+        x_class = "x-box-#{x}"
+        y_oriented_number = y + ((x-1) * 14)
+        x_oriented_number = ((y-1) * 14) + x
+
+        plot_number = x_oriented_number
+      %>
+      <% if plot_number.to_s == params[:id] %>
+        <div class="<%= y_class %> <%= x_class %> selected-box" id="plot-<%= plot_number %>">
+          <p>&nbsp;<%= SampleData.find(params[:id]).sample_count %></p>
+        </div>
+      <% else %>
+        <div class="<%= y_class %> <%= x_class %> inner-box" id="plot-<%= plot_number %>">
+          <a href="/regions/<%= plot_number %>" data-turbolinks-persist-scroll="true"><p>#<%= plot_number %></p></a>
+        </div>
+      <% end %>
+    <%
+      end
+  end %>
+  </div>
+</div>
