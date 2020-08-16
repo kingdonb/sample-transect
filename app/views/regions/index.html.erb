@@ -11,10 +11,9 @@
 
         plot_number = x_oriented_number
       %>
-    <div class="<%= y_class %> <%= x_class %> inner-box" id="plot-<%= plot_number %>"
-        data-action="click->sample#visit" data-sample-url="/regions/<%= plot_number %>"
-        data-turbolinks-persist-scroll="true">
-      <p>#<%= plot_number %></p>
+    <div class="<%= y_class %> <%= x_class %> inner-box" id="plot-<%= plot_number %>">
+      <p> <a href="/regions/<%= plot_number %>" data-turbolinks-persist-scroll="true">#<%= plot_number %></a>
+      </p>
     </div>
     <%
       end
