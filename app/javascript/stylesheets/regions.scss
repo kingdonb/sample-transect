@@ -27,6 +27,29 @@ $blue-color: lightblue;
     float: left;
     border: 1px solid gray;
 
+    #location-reminder {
+      background: $blue-color;
+      position: absolute;
+      padding: 0;
+      transition: opacity .5s;
+      height: 7.14285%;
+      width: 10%;
+      opacity: .9;
+      left: 0;
+      top: -7.15%;
+    }
+
+    p {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #000;
+      font-family: 'arial';
+      font-size: 14pt;
+    }
+
     .y-box-1 {
       top: 0;
     }
@@ -121,16 +144,6 @@ $blue-color: lightblue;
       height: 7.14285%;
       width: 7.14285%;
 
-      p {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #000;
-        font-family: 'arial';
-        font-size: 14pt;
-      }
       &:hover {
         opacity: .9;
         transition: opacity .5s;
@@ -145,17 +158,6 @@ $blue-color: lightblue;
       height: 7.14285%;
       width: 7.14285%;
       opacity: .9;
-
-      p {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #000;
-        font-family: 'arial';
-        font-size: 14pt;
-      }
     }
   }
 }

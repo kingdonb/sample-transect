@@ -1,6 +1,9 @@
 <div id="outer-box">
   <%= image_pack_tag "Wondrous Wetland.png" %>
   <div id="outer-container" data-controller="sample">
+  <div id="location-reminder">
+    <p>Plot&nbsp;#:&nbsp;<%= params[:id] %></p>
+  </div>
   <%
     (1..14).each do |y|
       (1..14).each do |x|
