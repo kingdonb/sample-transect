@@ -16,5 +16,6 @@ const imagePath = (name) => images(name, true)
 import 'bootstrap/dist/js/bootstrap';
 import "controllers"
 
+require("scrolling")
 var Turbolinks = require("turbolinks")
 Turbolinks.start()
