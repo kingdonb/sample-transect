@@ -144,6 +144,12 @@ $blue-color: lightblue;
       height: 7.14285%;
       width: 7.14285%;
 
+      a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+      }
       &:hover {
         opacity: .9;
         transition: opacity .5s;
