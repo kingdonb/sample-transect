@@ -1,3 +1,4 @@
+# syntax = docker/dockerfile:experimental
 FROM kingdonb/docker-rvm-support:latest AS builder
 
 LABEL version="2.0.0"
@@ -6,26 +7,46 @@ ENV RUBY=2.7.1
 
 # USER ${RVM_USER}
 
+FROM builder AS gemcache
+ENV BUNDLE_PATH /home/${RVM_USER}/.bundle/
 COPY --chown=${RVM_USER} Gemfile Gemfile.lock .ruby-version ${APPDIR}/
 # COPY --chown=${RVM_USER} vendor/gems ${APPDIR}/vendor/gems
-RUN rvm ${RUBY} do bash -c 'bundle config set frozen true && bundle install && bundle clean --force'
+RUN --mount=type=cache,target=/home/${RVM_USER}/.bundle/ rvm ${RUBY} do bash -c \
+  'bundle config set frozen true && bundle config set deployment true && \
+   bundle install && \
+   bundle clean --force'
+# RUN rvm 2.7.1 do bash -c 'bundle config path && exit 1'
+
+# RUN fail pending tdd
+
+FROM builder AS yarncache
+ENV YARN_CACHE_FOLDER /home/${RVM_USER}/.cache/yarn/v6
+COPY --chown=${RVM_USER} package.json yarn.lock ${APPDIR}/
+RUN --mount=type=cache,target=/home/${RVM_USER}/.cache/yarn/v6 yarn install
+
+FROM builder AS stage
+
+COPY --chown=${RVM_USER} Gemfile Gemfile.lock .ruby-version ${APPDIR}/
+COPY --chown=${RVM_USER} package.json yarn.lock ${APPDIR}/
+COPY --chown=${RVM_USER} --from=gemcache /home/${RVM_USER}/app/vendor/bundle /home/${RVM_USER}/app/vendor/bundle/
+COPY --chown=${RVM_USER} --from=yarncache ${APPDIR}/node_modules ${APPDIR}/node_modules/
+COPY --chown=${RVM_USER} .browserslistrc babel.config.js postcss.config.js ${APPDIR}/
 
 COPY --chown=${RVM_USER} Rakefile ${APPDIR}/
 COPY --chown=${RVM_USER} config/ ${APPDIR}/config/
 COPY --chown=${RVM_USER} bin/ ${APPDIR}/bin/
 
 COPY --chown=${RVM_USER} app/javascript ${APPDIR}/app/javascript/
-COPY --chown=${RVM_USER} .browserslistrc babel.config.js package.json yarn.lock postcss.config.js ${APPDIR}/
-
+# ENV BUNDLE_CACHE_PATH /home/${RVM_USER}/.bundle/cache/gems
+RUN rvm ${RUBY} do bundle install
 RUN ASSET_PRECOMPILE=1 rvm ${RUBY} do bundle exec rake assets:precompile
 ENV RAILS_ENV production
 
 RUN rvm ${RUBY} do bundle install
-RUN yarn install
 RUN ASSET_PRECOMPILE=1 rvm ${RUBY} do bundle exec rake assets:precompile
 RUN yarn install --check-files
 
-FROM builder AS dev
+FROM stage AS dev
 ENV RAILS_ENV development
 
 RUN  rvm ${RUBY} do bash -c 'bundle config set with development && bundle install'
@@ -41,8 +62,8 @@ ENV RUBY=2.7.1
 USER root
 
 # WORKDIR ${APPDIR} - this is set upstream by docker-rvm-support
-COPY --chown=${RVM_USER} --from=builder /usr/local/ /usr/local/
-COPY --chown=${RVM_USER} --from=builder ${APPDIR} ${APPDIR}
+COPY --chown=${RVM_USER} --from=stage /usr/local/ /usr/local/
+COPY --chown=${RVM_USER} --from=stage ${APPDIR} ${APPDIR}
 COPY --chown=${RVM_USER} . ${APPDIR}
 # RUN chown -R ${RVM_USER} ${APPDIR}
 USER ${RVM_USER}
