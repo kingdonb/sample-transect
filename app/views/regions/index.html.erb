@@ -1,6 +1,6 @@
 <div id="outer-box">
   <%= image_pack_tag "Wondrous Wetland.png" %>
-  <div id="outer-container">
+  <div id="outer-container" data-controller="sample">
   <%
     (1..14).each do |y|
       (1..14).each do |x|
@@ -8,9 +8,12 @@
         x_class = "x-box-#{x}"
         y_oriented_number = y + ((x-1) * 14)
         x_oriented_number = ((y-1) * 14) + x
+
+        plot_number = x_oriented_number
       %>
-    <div class="<%= y_class %> <%= x_class %> inner-box">
-      <p>#<%= x_oriented_number %></p>
+    <div class="<%= y_class %> <%= x_class %> inner-box" id="plot-<%= plot_number %>"
+        data-action="click->sample#visit" data-sample-url="/regions/<%= plot_number %>">
+      <p>#<%= plot_number %></p>
     </div>
     <%
       end
