@@ -22,3 +22,8 @@ build:
 
 pull:
   docker pull {{IMAGE}}
+
+run:
+  yarn install --check-files
+  RAILS_ENV=development exec ./bin/webpack-dev-server&
+  RAILS_ENV=development rails s -b 0.0.0.0

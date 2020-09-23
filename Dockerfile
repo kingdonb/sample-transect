@@ -30,6 +30,7 @@ FROM builder AS dev
 ENV RAILS_ENV development
 
 RUN  rvm ${RUBY} do bash -c 'bundle config set with development && bundle install'
+RUN yarn install --check-files
 ENV PORT 3000
 EXPOSE 3000
 
