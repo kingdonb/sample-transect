@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_155505) do
+ActiveRecord::Schema.define(version: 2020_09_23_035856) do
+
+  create_table "alumnis", force: :cascade do |t|
+    t.string "first"
+    t.string "last"
+    t.string "linkedin_profile"
+    t.string "graduation_year"
+    t.string "tags"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "sample_data", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
