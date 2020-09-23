@@ -80,4 +80,4 @@ ENV PORT 3000
 ENV RAILS_SERVE_STATIC_FILES true
 EXPOSE 3000
 
-CMD rvm ${RUBY} do bash --login -c 'bundle exec rails s -p $PORT -b 0.0.0.0'
+CMD rvm ${RUBY} do bash --login -c 'yarn install --check-files && bundle exec rails s -p $PORT -b 0.0.0.0'
