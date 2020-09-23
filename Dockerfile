@@ -31,7 +31,7 @@ COPY --chown=${RVM_USER} bin/ ${APPDIR}/bin/
 COPY --chown=${RVM_USER} .browserslistrc babel.config.js package.json yarn.lock postcss.config.js ${APPDIR}/
 COPY --chown=${RVM_USER} app/javascript ${APPDIR}/app/javascript/
 RUN --mount=type=cache,uid=999,gid=1000,target=/tmp/.cache/node_modules \
-    yarn install --modules-folder /tmp/.cache/node_modules && \
+    yarn install --check-files --modules-folder /tmp/.cache/node_modules && \
     cp -ar /tmp/.cache/node_modules/ /tmp/vendor/node_modules
 
 RUN echo '--modules-folder /tmp/vendor/node_modules' > .yarnrc
