@@ -30,14 +30,14 @@ COPY --chown=${RVM_USER} bin/ ${APPDIR}/bin/
 
 COPY --chown=${RVM_USER} .browserslistrc babel.config.js package.json yarn.lock postcss.config.js ${APPDIR}/
 COPY --chown=${RVM_USER} app/javascript ${APPDIR}/app/javascript/
-RUN --mount=type=cache,uid=999,gid=1000,target=/tmp/.cache/node_modules \
-    yarn install --check-files --modules-folder /tmp/.cache/node_modules && \
-    cp -ar /tmp/.cache/node_modules/ /tmp/vendor/node_modules
-
-RUN echo '--modules-folder /tmp/vendor/node_modules' > .yarnrc
+#RUN --mount=type=cache,uid=999,gid=1000,target=/tmp/.cache/node_modules \
+#    yarn install --check-files --modules-folder /tmp/.cache/node_modules && \
+#    cp -ar /tmp/.cache/node_modules/ /tmp/vendor/node_modules
+#
+#RUN echo '--modules-folder /tmp/vendor/node_modules' > .yarnrc
 #RUN cat .yarnrc && sleep 600
-#RUN yarn install --check-files && rm bin/yarn
-#RUN ASSET_PRECOMPILE=1 rvm ${RUBY} do bundle exec rake assets:precompile
+RUN yarn install --check-files && rm bin/yarn
+RUN ASSET_PRECOMPILE=1 rvm ${RUBY} do bundle exec rake assets:precompile
 #ENV RAILS_ENV production
 
 #RUN rvm ${RUBY} do bundle install
@@ -62,9 +62,8 @@ USER root
 
 # WORKDIR ${APPDIR} - this is set upstream by docker-rvm-support
 COPY --chown=${RVM_USER} --from=builder /usr/local/ /usr/local/
-COPY --chown=${RVM_USER} --from=builder ${APPDIR} ${APPDIR}
 COPY --chown=${RVM_USER} --from=builder /tmp/vendor/bundle ${APPDIR}/vendor/bundle
-COPY --chown=${RVM_USER} --from=builder /tmp/vendor/node_modules ${APPDIR}/node_modules
+COPY --chown=${RVM_USER} --from=builder ${APPDIR} ${APPDIR}
 COPY --chown=${RVM_USER} . ${APPDIR}
 # RUN chown -R ${RVM_USER} ${APPDIR}
 USER ${RVM_USER}
