@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Alumnis</h1>
+
+<div><p>Login Information</p>
+  <p><%= session[:userinfo].inspect %></p>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>First</th>
+      <th>Last</th>
+      <th>Linkedin profile</th>
+      <th>Graduation year</th>
+      <th>Tags</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alumnis.each do |alumni| %>
+      <tr>
+        <td><%= alumni.first %></td>
+        <td><%= alumni.last %></td>
+        <td><%= alumni.linkedin_profile %></td>
+        <td><%= alumni.graduation_year %></td>
+        <td><%= alumni.tags %></td>
+        <td><%= link_to 'Show', alumni %></td>
+        <td><%= link_to 'Edit', edit_alumni_path(alumni) %></td>
+        <td><%= link_to 'Destroy', alumni, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Alumni', new_alumni_path %>

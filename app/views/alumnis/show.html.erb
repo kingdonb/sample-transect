@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First:</strong>
+  <%= @alumni.first %>
+</p>
+
+<p>
+  <strong>Last:</strong>
+  <%= @alumni.last %>
+</p>
+
+<p>
+  <strong>Linkedin profile:</strong>
+  <%= @alumni.linkedin_profile %>
+</p>
+
+<p>
+  <strong>Graduation year:</strong>
+  <%= @alumni.graduation_year %>
+</p>
+
+<p>
+  <strong>Tags:</strong>
+  <%= @alumni.tags %>
+</p>
+
+<%= link_to 'Edit', edit_alumni_path(@alumni) %> |
+<%= link_to 'Back', alumnis_path %>
