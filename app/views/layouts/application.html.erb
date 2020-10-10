@@ -10,6 +10,11 @@
   </head>
 
   <body>
+    <% if session[:userinfo] %>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="<%= 'active' if params[:controller] == 'logout' %>"><a id="qsLogoutBtn" href="/logout">Logout</a></li>
+      </ul>
+    <% end %>
     <%= yield %>
   </body>
 </html>
