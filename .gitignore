@@ -16,6 +16,8 @@
 /log/*
 /tmp/*
 
+# Ignore development/test secrets .env files
+.env*
 
 /public/assets
 .byebug_history

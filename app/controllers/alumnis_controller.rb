@@ -1,4 +1,6 @@
 class AlumnisController < ApplicationController
+  include Secured
+
   before_action :set_alumni, only: [:show, :edit, :update, :destroy]
 
   # GET /alumnis
