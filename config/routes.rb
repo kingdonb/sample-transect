@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  # authorization with auth0
+  get 'auth/auth0/callback' => 'auth0#callback'
+  get 'auth/failure' => 'auth0#failure'
+
   resources :alumnis
   root to: 'regions#index'
   get '/regions', to: 'regions#index'
