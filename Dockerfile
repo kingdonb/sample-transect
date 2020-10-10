@@ -56,7 +56,7 @@ FROM kingdonb/docker-rvm-support:latest AS production
 
 LABEL version="2.0.0"
 LABEL maintainer="kingdon.b@nd.edu"
-ENV RUBY=2.7.1
+ENV RUBY=2.7.2
 
 USER root
 
