@@ -3,7 +3,7 @@ FROM kingdonb/docker-rvm-support:latest AS builder
 
 LABEL version="2.0.0"
 LABEL maintainer="kingdon.b@nd.edu"
-ENV RUBY=2.7.6
+ENV RUBY=3.1.2
 
 # USER ${RVM_USER}
 
@@ -56,7 +56,7 @@ FROM kingdonb/docker-rvm-support:latest AS production
 
 LABEL version="2.0.0"
 LABEL maintainer="kingdon.b@nd.edu"
-ENV RUBY=2.7.6
+ENV RUBY=3.1.2
 
 USER root
 
