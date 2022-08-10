@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-FROM kingdonb/docker-rvm-support:latest AS builder
+FROM kingdonb/docker-rvm-support:latest-ruby3 AS builder
 
 LABEL version="2.0.0"
 LABEL maintainer="kingdon.b@nd.edu"
