@@ -1,5 +1,5 @@
 name: sample
-image: registry.cloud.okteto.net/kingdonb/sample_transect:dev
+image: registry.cloud.okteto.net/sample-kingdonb/sample_transect:dev
 command:
 - "bash"
 - "--login"

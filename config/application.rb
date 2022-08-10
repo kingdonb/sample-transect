@@ -33,5 +33,6 @@ module SampleTransect
     config.generators.system_tests = nil
 
     config.hosts << "sample.wkstest.xyz"
+    config.hosts << "sample-sample-kingdonb.cloud.okteto.net"
   end
 end
