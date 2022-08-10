@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/part-of: sample
     app.kubernetes.io/version: v1
   name: sample
-  namespace: kingdonb
+  namespace: sample-kingdonb
 spec:
   replicas: 1
   selector:
@@ -100,7 +100,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: kingdonb
+  namespace: sample-kingdonb
   name: sample
   labels:
     app.kubernetes.io/instance: sample
